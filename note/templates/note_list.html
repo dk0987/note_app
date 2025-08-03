@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Notes</h2>
+<a class="btn btn-success mb-3" href="{% url 'note:note-create' %}">+ New Note</a>
+<div class="row">
+  {% for note in notes %}
+  <div class="col-md-4 mb-3">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ note.title }}</h5>
+        <p class="card-text">{{ note.content|truncatechars:100 }}</p>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'note:note-edit' note.pk %}" class="btn btn-sm btn-primary">Edit</a>
+        <a href="{% url 'note:note-delete' note.pk %}" class="btn btn-sm btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No notes yet. Create one!</p>
+  {% endfor %}
+</div>
+{% endblock %}
